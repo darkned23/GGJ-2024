@@ -1,4 +1,6 @@
+using System.Collections;
 using UnityEngine;
+using Unity.Collections;
 
 public class ChangePlayer : MonoBehaviour
 {
@@ -19,12 +21,12 @@ public class ChangePlayer : MonoBehaviour
             Debug.LogError("Make sure to assign the players in the Inspector.");
         }
 
-
         // Initially activate Player1 and deactivate Player2
         player1.SetActive(true);
         camera1.SetActive(true);
         player2.SetActive(false);
         camera2.SetActive(false);
+
         // Initialize the last switch time
         lastSwitchTime = -cooldownTime;
     }
@@ -32,7 +34,7 @@ public class ChangePlayer : MonoBehaviour
     void Update()
     {
         // Switch characters when a key is pressed and cooldown has expired
-        if (canSwitch && (Input.GetKeyDown(KeyCode.E) || Input.GetKeyDown(KeyCode.JoystickButton3)))
+        if (canSwitch && (Input.GetKeyDown(KeyCode.E) || Input.GetKeyDown(KeyCode.JoystickButton1)))
         {
             SwitchCharacters();
         }
@@ -46,22 +48,19 @@ public class ChangePlayer : MonoBehaviour
             // Update the last switch time
             lastSwitchTime = Time.time;
 
-            // Store the current position of the player being deactivated
-            Vector3 currentPlayerPosition = player1.activeSelf ? player1.transform.position : player2.transform.position;
-
             // Deactivate the currently active player and activate the inactive one
-            player1.SetActive(!player1.activeSelf);
-            player2.SetActive(!player2.activeSelf);
+            camera1.SetActive(!camera1.activeSelf);
+            camera2.SetActive(!camera2.activeSelf);
 
-            // Set the position of the newly activated player to the position of the previously deactivated player
-            if (player1.activeSelf)
-            {
-                player1.transform.position = currentPlayerPosition;
-            }
-            else
-            {
-                player2.transform.position = currentPlayerPosition;
-            }
+            StartCoroutine("CoroutineWaitMoveCamera");
         }
+    }
+
+    IEnumerator CoroutineWaitMoveCamera()
+    {
+        yield return new WaitForSeconds(1f);
+
+        player1.SetActive(!player1.activeSelf);
+        player2.SetActive(!player2.activeSelf);
     }
 }
