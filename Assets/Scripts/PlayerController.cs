@@ -1,54 +1,60 @@
 using UnityEngine;
-using UnityEngine.InputSystem;
 
-[RequireComponent(typeof(CharacterController), typeof(PlayerInput))]
 public class PlayerController : MonoBehaviour
 {
-    private CharacterController controller;
-    private Vector3 playerVelocity;
-    private bool groundedPlayer;
+    [SerializeField] private float Speed = 5f;
+    [SerializeField] private float jumpForce = 10f;
+    [SerializeField] private float gravity = 9.8f;
+    [SerializeField] private float distanceRayCast = 2.0f;
+    private bool isGrounded;
+    private CharacterController characterController;
 
-    private PlayerInput playerInput;
-    [SerializeField] private float playerSpeed = 2.0f;
-    [SerializeField] private float jumpHeight = 1.0f;
-    [SerializeField] private float gravityValue = -9.81f;
+    // La velocidad vertical del personaje
+    private float verticalVelocity;
 
-    private InputAction moveAction;
-    private InputAction jumpAction;
-    private InputAction attackAction;
-
-    private void Start()
+    void Start()
     {
-        controller = GetComponent<CharacterController>();
-        playerInput = GetComponent<PlayerInput>();
-        moveAction = playerInput.actions["Move"];
-        jumpAction = playerInput.actions["Jump"];
-        attackAction = playerInput.actions["Attack"];
+        characterController = GetComponent<CharacterController>();
     }
 
     void Update()
     {
-        groundedPlayer = controller.isGrounded;
-        if (groundedPlayer && playerVelocity.y < 0)
+        // Mover horizontalmente
+        float horizontalMovement = Input.GetAxis("Horizontal");
+        Vector3 movement = new Vector3(horizontalMovement, 0f, 0f);
+        characterController.Move(movement * Speed * Time.deltaTime);
+
+        // Saltar
+        if (isGrounded && Input.GetButtonDown("Jump"))
         {
-            playerVelocity.y = 0f;
+            verticalVelocity = jumpForce;
+            isGrounded = false;
         }
 
-        Vector2 input = moveAction.ReadValue<Vector2>();
-        Vector3 move = new Vector3(input.x, 0, 0);
-        controller.Move(move * Time.deltaTime * playerSpeed);
-
-        // Changes the height position of the player..
-        if (jumpAction.triggered && groundedPlayer)
+        // Raycast para la detección de suelo
+        RaycastHit hit;
+        if (Physics.Raycast(transform.position, Vector3.down, out hit, distanceRayCast))
         {
-            playerVelocity.y += Mathf.Sqrt(jumpHeight * -3.0f * gravityValue);
+            isGrounded = true;
+
+            // Visualizar el raycast en el Inspector
+            Debug.DrawRay(transform.position, Vector3.down * distanceRayCast, Color.green);
         }
-        if (attackAction.triggered)
+        else
         {
-            Debug.Log("Attaking");
+            isGrounded = false;
+
+            // Visualizar el raycast en el Inspector
+            Debug.DrawRay(transform.position, Vector3.down * distanceRayCast, Color.red);
         }
 
-        playerVelocity.y += gravityValue * Time.deltaTime;
-        controller.Move(playerVelocity * Time.deltaTime);
+        // Aplicar gravedad
+        if (!isGrounded)
+        {
+            verticalVelocity -= gravity * Time.deltaTime;
+        }
+
+        // Aplicar movimiento vertical
+        characterController.Move(Vector3.up * verticalVelocity * Time.deltaTime);
     }
 }
