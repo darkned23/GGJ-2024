@@ -3,7 +3,7 @@ using System.Collections;
 
 public class PlayerController : MonoBehaviour
 {
-    [SerializeField] private float speed = 5f;
+    public float speed = 5f;
     [SerializeField] private float jumpForce = 10f;
     public float jumpCooldown = 0.5f;
     [SerializeField] private float gravity = 9.8f;
@@ -21,7 +21,7 @@ public class PlayerController : MonoBehaviour
     public float attackDuration = 0.5f;
 
     private bool canAttack = true;
-    private bool canJump = true;
+    [HideInInspector] public bool canJump = true;
     [HideInInspector] public float horizontalMovement;
 
     void Start()

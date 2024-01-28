@@ -18,7 +18,7 @@ public class EnemyAI : MonoBehaviour
     [SerializeField] private float timeAnimDie;
     // [SerializeField] private GameObject healing;
     // [SerializeField] private Score score;
-    private int aumentoScore = 100;
+    // private int aumentoScore = 100;
     private int _currentHealth;
     [HideInInspector] public bool isStunning;
 

@@ -5,11 +5,12 @@ TagManager:
   serializedVersion: 2
   tags:
   - Enemy
+  - Movable
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Movable
   - Water
   - UI
   - 
