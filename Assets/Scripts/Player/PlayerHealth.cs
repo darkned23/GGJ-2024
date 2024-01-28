@@ -31,7 +31,7 @@ public class PlayerHealth : MonoBehaviour
         {
             // Aplicar daño al jugador
             currentHealth -= damage;
-
+            playerController.animator.SetTrigger("RecibirGolpe");
             // Activar la invulnerabilidad y el retroceso
             StartCoroutine(InvulnerabilityTime());
             Knockback();

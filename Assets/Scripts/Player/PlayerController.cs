@@ -1,11 +1,14 @@
 using UnityEngine;
+using System.Collections;
 
 public class PlayerController : MonoBehaviour
 {
     [SerializeField] private float speed = 5f;
     [SerializeField] private float jumpForce = 10f;
+    public float jumpCooldown = 0.5f;
     [SerializeField] private float gravity = 9.8f;
     [SerializeField] private float distanceRayCast = 2.0f;
+    public Animator animator;
     private bool isGrounded;
     private CharacterController characterController;
 
@@ -18,6 +21,7 @@ public class PlayerController : MonoBehaviour
     public float attackDuration = 0.5f;
 
     private bool canAttack = true;
+    private bool canJump = true;
     [HideInInspector] public float horizontalMovement;
 
     void Start()
@@ -35,9 +39,10 @@ public class PlayerController : MonoBehaviour
         horizontalMovement = Input.GetAxis("Horizontal");
         Vector3 movement = new Vector3(horizontalMovement, 0f, 0f);
         characterController.Move(movement * speed * Time.deltaTime);
+        animator.SetFloat("Velocidad", Mathf.Abs(horizontalMovement));
 
         // Saltar
-        if (isGrounded && Input.GetButtonDown("Jump"))
+        if (isGrounded && Input.GetButtonDown("Jump") && canJump)
         {
             Jump(jumpForce);
             isGrounded = false;
@@ -89,15 +94,19 @@ public class PlayerController : MonoBehaviour
         StartCoroutine(DisableColliderAfterDuration());
 
         // Inicia el cooldown
-        StartCoroutine(StartCooldown());
+        StartCoroutine(CooldownAttack());
     }
 
     public void Jump(float jumpHeigth)
     {
         verticalVelocity = jumpHeigth;
+
+        animator.SetTrigger("Saltar");
+
+        StartCoroutine(CooldownJump());
     }
 
-    System.Collections.IEnumerator DisableColliderAfterDuration()
+    IEnumerator DisableColliderAfterDuration()
     {
         // Espera la duración del ataque
         yield return new WaitForSeconds(attackDuration);
@@ -109,7 +118,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    System.Collections.IEnumerator StartCooldown()
+    IEnumerator CooldownAttack()
     {
         // Establece la bandera de ataque a falso
         canAttack = false;
@@ -119,5 +128,16 @@ public class PlayerController : MonoBehaviour
 
         // Restablece la bandera de ataque a verdadero después del cooldown
         canAttack = true;
+    }
+    IEnumerator CooldownJump()
+    {
+        // Establece la bandera de ataque a falso
+        canJump = false;
+
+        // Espera el tiempo de cooldown
+        yield return new WaitForSeconds(jumpCooldown);
+
+        // Restablece la bandera de ataque a verdadero después del cooldown
+        canJump = true;
     }
 }

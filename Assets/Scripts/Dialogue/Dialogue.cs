@@ -5,11 +5,15 @@ using System.Collections;
 
 public class Dialogue : MonoBehaviour
 {
+    [Header("Config Dialogue")]
     [SerializeField] private GameObject dialoguePanel;
     [SerializeField] private TMP_Text dialogueText;
     [SerializeField] private GameObject dialogueMark;
     [SerializeField, TextArea(4, 6)] private String[] dialogueLines;
     [SerializeField] private float typingTime = 0.05f;
+    [Header("Other config")]
+    [SerializeField] private bool canBeGrabbed;
+
     private bool isPlayerInRange;
     private bool didDialogueStart;
     private int lineIndex;
@@ -56,6 +60,10 @@ public class Dialogue : MonoBehaviour
             dialoguePanel.SetActive(false);
             dialogueMark.SetActive(true);
             Time.timeScale = 1f;
+            if (canBeGrabbed)
+            {
+                Destroy(gameObject);
+            }
         }
     }
 
