@@ -11,4 +11,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/darkned.unity
     guid: 61b2faefb9f7e28418b7af884bc7ad9c
+  - enabled: 1
+    path: Assets/Scenes/CreditsScene.unity
+    guid: 0c1f4de9455947d4c8bfc5929da2dea8
   m_configObjects: {}

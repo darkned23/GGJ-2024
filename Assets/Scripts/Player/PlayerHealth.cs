@@ -25,11 +25,15 @@ public class PlayerHealth : MonoBehaviour
         // Verificar si la colisión es con un enemigo
         if (hit.gameObject.CompareTag("Enemy"))
         {
+            Knockback();
             TakeDamage(20); // Puedes ajustar la cantidad de daño según tus necesidades
         }
         else if (hit.gameObject.CompareTag("Danger"))
         {
+            Knockback();
             TakeDamage(10);
+
+            StartCoroutine(playerRespawn.Respawn());
         }
     }
 
@@ -43,10 +47,8 @@ public class PlayerHealth : MonoBehaviour
             playerController.animator.ResetTrigger("Saltar");
 
             StartCoroutine(StopMove());
-            StartCoroutine(playerRespawn.Respawn());
             // Activar la invulnerabilidad y el retroceso
             StartCoroutine(InvulnerabilityTime());
-            Knockback();
 
             // Puedes agregar aquí lógica adicional, como reproducir efectos de sonido o mostrar efectos visuales de daño
 
