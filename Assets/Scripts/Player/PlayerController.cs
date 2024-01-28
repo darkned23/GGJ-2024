@@ -3,11 +3,11 @@ using System.Collections;
 
 public class PlayerController : MonoBehaviour
 {
-    public float speed = 5f;
-    [SerializeField] private float jumpForce = 10f;
+    public float speed = 5.0f;
+    public float jumpForce = 10f;
     public float jumpCooldown = 0.5f;
-    [SerializeField] private float gravity = 9.8f;
-    [SerializeField] private float distanceRayCast = 2.0f;
+    public float gravity = 9.8f;
+    public float distanceRayCast = 2.0f;
     public Animator animator;
     private bool isGrounded;
     private CharacterController characterController;
@@ -20,7 +20,7 @@ public class PlayerController : MonoBehaviour
     public float attackCooldown = 1f;
     public float attackDuration = 0.5f;
 
-    private bool canAttack = true;
+    [HideInInspector] public bool canAttack = true;
     [HideInInspector] public bool canJump = true;
     [HideInInspector] public float horizontalMovement;
 
@@ -94,7 +94,7 @@ public class PlayerController : MonoBehaviour
         StartCoroutine(DisableColliderAfterDuration());
 
         // Inicia el cooldown
-        StartCoroutine(CooldownAttack());
+        StartCoroutine(Cooldown(canAttack, attackCooldown));
     }
 
     public void Jump(float jumpHeigth)
@@ -103,7 +103,7 @@ public class PlayerController : MonoBehaviour
 
         animator.SetTrigger("Saltar");
 
-        StartCoroutine(CooldownJump());
+        StartCoroutine(Cooldown(canJump, jumpCooldown));
     }
 
     IEnumerator DisableColliderAfterDuration()
@@ -118,26 +118,13 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    IEnumerator CooldownAttack()
+    public IEnumerator Cooldown(bool canDo, float timeCooldown)
     {
-        // Establece la bandera de ataque a falso
-        canAttack = false;
+        canDo = false;
 
         // Espera el tiempo de cooldown
-        yield return new WaitForSeconds(attackCooldown);
+        yield return new WaitForSeconds(timeCooldown);
 
-        // Restablece la bandera de ataque a verdadero después del cooldown
-        canAttack = true;
-    }
-    IEnumerator CooldownJump()
-    {
-        // Establece la bandera de ataque a falso
-        canJump = false;
-
-        // Espera el tiempo de cooldown
-        yield return new WaitForSeconds(jumpCooldown);
-
-        // Restablece la bandera de ataque a verdadero después del cooldown
-        canJump = true;
+        canDo = true;
     }
 }

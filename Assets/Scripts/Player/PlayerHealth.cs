@@ -1,8 +1,11 @@
+using System.Collections;
 using UnityEngine;
 
 public class PlayerHealth : MonoBehaviour
 {
     private PlayerController playerController;
+    private PlayerRespawn playerRespawn;
+    public float moveCooldown = 5.0f;
     public int maxHealth = 100;
     public float invulnerabilityTime = 1.5f;
     public float knockbackForce = 5f;
@@ -13,6 +16,7 @@ public class PlayerHealth : MonoBehaviour
     void Start()
     {
         currentHealth = maxHealth;
+        playerRespawn = GetComponent<PlayerRespawn>();
         playerController = GetComponent<PlayerController>();
     }
 
@@ -23,6 +27,10 @@ public class PlayerHealth : MonoBehaviour
         {
             TakeDamage(20); // Puedes ajustar la cantidad de daño según tus necesidades
         }
+        else if (hit.gameObject.CompareTag("Danger"))
+        {
+            TakeDamage(10);
+        }
     }
 
     public void TakeDamage(int damage)
@@ -32,6 +40,10 @@ public class PlayerHealth : MonoBehaviour
             // Aplicar daño al jugador
             currentHealth -= damage;
             playerController.animator.SetTrigger("RecibirGolpe");
+            playerController.animator.ResetTrigger("Saltar");
+
+            StartCoroutine(StopMove());
+            StartCoroutine(playerRespawn.Respawn());
             // Activar la invulnerabilidad y el retroceso
             StartCoroutine(InvulnerabilityTime());
             Knockback();
@@ -44,6 +56,14 @@ public class PlayerHealth : MonoBehaviour
                 Die();
             }
         }
+    }
+    IEnumerator StopMove()
+    {
+        playerController.enabled = false;
+
+        yield return new WaitForSeconds(moveCooldown);
+
+        playerController.enabled = true;
     }
 
     void Die()
@@ -58,10 +78,11 @@ public class PlayerHealth : MonoBehaviour
         playerController.Jump(knockbackForce);
     }
 
-    System.Collections.IEnumerator InvulnerabilityTime()
+    IEnumerator InvulnerabilityTime()
     {
         // Activar la invulnerabilidad
         isInvulnerable = true;
+
 
         // Esperar el tiempo de invulnerabilidad
         yield return new WaitForSeconds(invulnerabilityTime);
