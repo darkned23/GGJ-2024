@@ -19,6 +19,7 @@ public class PlayerController : MonoBehaviour
     public Collider attackCollider;
     public float attackCooldown = 1f;
     public float attackDuration = 0.5f;
+    public bool allowAttack;
 
     [HideInInspector] public bool canAttack = true;
     [HideInInspector] public bool canJump = true;
@@ -72,7 +73,7 @@ public class PlayerController : MonoBehaviour
         }
 
         // Si el clic izquierdo está presionado y el ataque está disponible, realiza el ataque
-        if (Input.GetMouseButtonDown(0) && canAttack)
+        if (Input.GetMouseButtonDown(0) && canAttack && allowAttack)
         {
             Attack();
         }
