@@ -10,33 +10,33 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5b11a58205ec3474ca216360e9fa74a8, type: 3}
-  m_Name: Dialogo01 Shared Data
+  m_Name: Dialogue01 Shared Data
   m_EditorClassIdentifier: 
-  m_TableCollectionName: Dialogo01
+  m_TableCollectionName: Dialogue01
   m_TableCollectionNameGuidString: f726c24041a34464184a981becd3a309
   m_Entries:
   - m_Id: 19300679680
-    m_Key: Bod dialogo 00
+    m_Key: 0
     m_Metadata:
       m_Items: []
   - m_Id: 179086884864
-    m_Key: Bod dialogo 01
+    m_Key: 1
     m_Metadata:
       m_Items: []
   - m_Id: 216621711360
-    m_Key: Bod dialogo 02
+    m_Key: 2
     m_Metadata:
       m_Items: []
   - m_Id: 231419215872
-    m_Key: Bod dialogo 03
+    m_Key: 3
     m_Metadata:
       m_Items: []
   - m_Id: 249379225600
-    m_Key: Bod dialogo 04
+    m_Key: 4
     m_Metadata:
       m_Items: []
   - m_Id: 266508763136
-    m_Key: Bod dialogo 05
+    m_Key: 5
     m_Metadata:
       m_Items: []
   m_Metadata:

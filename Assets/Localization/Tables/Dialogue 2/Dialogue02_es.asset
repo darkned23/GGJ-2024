@@ -1,0 +1,56 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9620f8c34305754d8cc9a7e49e852d9, type: 3}
+  m_Name: Dialogue02_es
+  m_EditorClassIdentifier: 
+  m_LocaleId:
+    m_Code: es
+  m_SharedData: {fileID: 11400000, guid: 3017634eb451379439c49df6864b2913, type: 2}
+  m_Metadata:
+    m_Items: []
+  m_TableData:
+  - m_Id: 11243421696
+    m_Localized: "Cliente: Mmm, estas empanadas est\xE1n incre\xEDbles. \xA1Vale
+      la pena cada mordisco!"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 14334623744
+    m_Localized: "Otro Cliente: S\xED, la comida aqu\xED siempre ha sido deliciosa,
+      pero escuch\xE9 un chisme interesante. La due\xF1a, Gloria, abri\xF3 este lugar
+      justo despu\xE9s de la muerte de su esposo. As\xED es como se le ocurri\xF3
+      el nombre del restaurante."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 17811701760
+    m_Localized: "Cliente: \xA1Aj\xE1! Se rumorea que el nombre \"Wodow's Food\"
+      es un juego de palabras entre \"viuda\" y \"food\". Un poco macabro, \xBFno
+      crees?"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 219880685568
+    m_Localized: "Otro Cliente: \xA1Exacto! Pero eso le ha dado un toque \xFAnico
+      al lugar. La viuda ha convertido la cocina en su propio escenario."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 232077721600
+    m_Localized: "Cliente: Tal vez es por eso que las empanadas tienen ese sabor
+      especial, \xA1como si estuvieran cargadas de secretos y misterios!"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 244811628544
+    m_Localized: "Otro Cliente: \xA1R\xEDete mientras comes, eso es lo que siempre
+      digo!"
+    m_Metadata:
+      m_Items: []
+  references:
+    version: 2
+    RefIds: []
