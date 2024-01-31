@@ -6,11 +6,11 @@ using System.Collections;
 public class Dialogue : MonoBehaviour
 {
     [Header("Config Dialogue")]
-    [SerializeField] private GameObject dialoguePanel;
-    [SerializeField] private TMP_Text dialogueText;
-    [SerializeField] private GameObject dialogueMark;
-    [SerializeField, TextArea(4, 6)] private String[] dialogueLines;
-    [SerializeField] private float typingTime = 0.05f;
+    public GameObject dialoguePanel;
+    public TMP_Text dialogueText;
+    public GameObject dialogueMark;
+    [TextArea(4, 6)] public String[] dialogueLines;
+    public float typingTime = 0.05f;
     [Header("Other config")]
     [SerializeField] private bool canBeGrabbed;
 
@@ -37,7 +37,7 @@ public class Dialogue : MonoBehaviour
             }
         }
     }
-    private void StartDialogue()
+    public void StartDialogue()
     {
         didDialogueStart = true;
         dialoguePanel.SetActive(true);
@@ -46,7 +46,7 @@ public class Dialogue : MonoBehaviour
         Time.timeScale = 0f;
         StartCoroutine("ShowLine");
     }
-    private void NextDialogueLine()
+    public void NextDialogueLine()
     {
         lineIndex++;
 
@@ -67,7 +67,7 @@ public class Dialogue : MonoBehaviour
         }
     }
 
-    private IEnumerator ShowLine()
+    public IEnumerator ShowLine()
     {
         dialogueText.text = string.Empty;
         foreach (char ch in dialogueLines[lineIndex])

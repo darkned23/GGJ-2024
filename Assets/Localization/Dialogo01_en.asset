@@ -1,0 +1,52 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9620f8c34305754d8cc9a7e49e852d9, type: 3}
+  m_Name: Dialogo01_en
+  m_EditorClassIdentifier: 
+  m_LocaleId:
+    m_Code: en
+  m_SharedData: {fileID: 11400000, guid: f726c24041a34464184a981becd3a309, type: 2}
+  m_Metadata:
+    m_Items: []
+  m_TableData:
+  - m_Id: 216621711360
+    m_Localized: "Slim: That sounds interesting. Anything else?\r"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 231419215872
+    m_Localized: 'Bob: Yeah, I hear strange noises, like they''re moving something
+      heavy. But when I go to check, nothing! There''s no one there.'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 249379225600
+    m_Localized: 'Robusto: Magical empanadas and kitchen tricks! This sounds like
+      a secret menu at the restaurant. Come on, Slim, let''s find out what''s behind
+      this magical club.'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 266508763136
+    m_Localized: "Bob: Good luck, detectives. May it not turn into a disappearing
+      act before you find the answer! Abracadabra and bon app\xE9tit!"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 19300679680
+    m_Localized: 'Robusto: Hello, Bob! What information do you have for us?'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 179086884864
+    m_Localized: 'Bob: Hello, Slim and Robusto! After closing, I see people enter
+      and never come out. Like some kind of magic trick or something.'
+    m_Metadata:
+      m_Items: []
+  references:
+    version: 2
+    RefIds: []

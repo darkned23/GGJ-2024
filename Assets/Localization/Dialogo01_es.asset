@@ -1,0 +1,53 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9620f8c34305754d8cc9a7e49e852d9, type: 3}
+  m_Name: Dialogo01_es
+  m_EditorClassIdentifier: 
+  m_LocaleId:
+    m_Code: es
+  m_SharedData: {fileID: 11400000, guid: f726c24041a34464184a981becd3a309, type: 2}
+  m_Metadata:
+    m_Items: []
+  m_TableData:
+  - m_Id: 216621711360
+    m_Localized: "Slim: Eso suena interesante. \xBFAlgo m\xE1s?"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 231419215872
+    m_Localized: "Bob: S\xED, escucho ruidos raros, como si movieran algo pesado.
+      Pero cuando voy a mirar, \xA1nada! No hay nadie."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 19300679680
+    m_Localized: "Robusto: \xA1Hola, Bob! \xBFQu\xE9 informaci\xF3n nos tienes?"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 179086884864
+    m_Localized: "Bob: \xA1Hola, Slim y Robusto! Despu\xE9s del cierre, veo gente
+      entrar y nunca salir. Como si fuera un truco de magia  o algo as\xED."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 249379225600
+    m_Localized: "Robusto: \xA1Empanadas m\xE1gicas y trucos de cocina! Esto suena
+      como un men\xFA secreto del restaurante. Vamos, Slim, descubramos qu\xE9 hay
+      detr\xE1s de este club m\xE1gico."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 266508763136
+    m_Localized: "Bob: Buena suerte, detectives. \xA1Que no se convierta en un espect\xE1culo
+      de desapariciones antes de que encuentren la respuesta! \xA1Abracadabra y buen
+      provecho!"
+    m_Metadata:
+      m_Items: []
+  references:
+    version: 2
+    RefIds: []

@@ -3776,9 +3776,17 @@ MonoBehaviour:
   dialogueText: {fileID: 1034207848}
   dialogueMark: {fileID: 903883112}
   dialogueLines:
-  - Puto el que lo lea
-  - Minecraft mejor que fornite
-  - No al porno
+  - 'Robusto: Hello, Bob! What information do you have for us?'
+  - 'Bob: Hello, Slim and Robusto! After closing, I see people enter and never come
+    out. Like some kind of magic trick or something.'
+  - 'Slim: That sounds interesting. Anything else?'
+  - 'Bob: Yeah, I hear strange noises, like they''re moving something heavy. But
+    when I go to check, nothing! There''s no one there.'
+  - 'Robusto: Magical empanadas and kitchen tricks! This sounds like a secret menu
+    at the restaurant. Come on, Slim, let''s find out what''s behind this magical
+    club.'
+  - "Bob: Good luck, detectives. May it not turn into a disappearing act before you
+    find the answer! Abracadabra and bon app\xE9tit!"
   typingTime: 0.05
   canBeGrabbed: 1
 --- !u!65 &1059565812
