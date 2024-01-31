@@ -1075,7 +1075,6 @@ GameObject:
   - component: {fileID: 418988015}
   - component: {fileID: 418988018}
   - component: {fileID: 418988016}
-  - component: {fileID: 418988019}
   - component: {fileID: 418988020}
   m_Layer: 0
   m_Name: Player1
@@ -1116,14 +1115,18 @@ MonoBehaviour:
   jumpForce: 22.5
   jumpCooldown: 0.5
   gravity: 49
-  distanceRayCast: 2
+  distanceRayCastGround: 1.4
   animator: {fileID: 871197005}
   attackCollider: {fileID: 480458467}
   attackCooldown: 1
   attackDuration: 0.5
   allowAttack: 0
-  canAttack: 1
+  maxHealth: 100
+  invulnerabilityTime: 1.5
+  knockbackForce: 5
+  canMove: 1
   canJump: 1
+  isGrounded: 0
   horizontalMovement: 0
 --- !u!143 &418988018
 CharacterController:
@@ -1143,22 +1146,6 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0
   m_Center: {x: 0, y: 0.02, z: 0}
---- !u!114 &418988019
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 418988011}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0fe9f2744475e8a43899b6f9f290ebd0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  moveCooldown: 1.6
-  maxHealth: 120
-  invulnerabilityTime: 0.5
-  knockbackForce: 5
 --- !u!114 &418988020
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1171,7 +1158,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a68a19c7aaa6ac459db780d4d0c6704, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  waitRespawn: 1.5
+  waitRespawn: 1
 --- !u!1 &444286030
 GameObject:
   m_ObjectHideFlags: 0
@@ -2771,7 +2758,6 @@ GameObject:
   - component: {fileID: 889700439}
   - component: {fileID: 889700442}
   - component: {fileID: 889700440}
-  - component: {fileID: 889700443}
   - component: {fileID: 889700445}
   - component: {fileID: 889700444}
   m_Layer: 0
@@ -2811,16 +2797,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 6
   jumpForce: 13
-  jumpCooldown: 1.2
+  jumpCooldown: 1
   gravity: 49
-  distanceRayCast: 1.1
+  distanceRayCastGround: 1.1
   animator: {fileID: 1110181555}
   attackCollider: {fileID: 1896496474}
   attackCooldown: 1
   attackDuration: 0.5
   allowAttack: 1
-  canAttack: 1
+  maxHealth: 100
+  invulnerabilityTime: 1.5
+  knockbackForce: 5
+  canMove: 1
   canJump: 1
+  isGrounded: 0
   horizontalMovement: 0
 --- !u!143 &889700442
 CharacterController:
@@ -2840,22 +2830,6 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0
   m_Center: {x: 0, y: -0.26, z: 0}
---- !u!114 &889700443
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 889700435}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0fe9f2744475e8a43899b6f9f290ebd0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  moveCooldown: 1.6
-  maxHealth: 200
-  invulnerabilityTime: 2
-  knockbackForce: 3
 --- !u!114 &889700444
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2881,7 +2855,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a68a19c7aaa6ac459db780d4d0c6704, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  waitRespawn: 1.5
+  waitRespawn: 1
 --- !u!1 &903080386
 GameObject:
   m_ObjectHideFlags: 0

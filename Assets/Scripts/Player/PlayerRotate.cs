@@ -6,23 +6,24 @@ public class PlayerRotate : MonoBehaviour
     public float raycastDistance = 2.0f;
 
     public float speedPush;
+    private float initialJumpForce;
     private float initialSpeed;
     private void Start()
     {
         initialSpeed = playerController.speed;
+        initialJumpForce = playerController.jumpForce;
     }
     void Update()
     {
         // Rotar en el eje Y según la dirección horizontal
-        RotatePlayer(playerController.horizontalMovement);
+        RotatePlayer(playerController.horizontalMovement * playerController.canMove);
 
         // Obtener la posición y la dirección de la cámara u otro objeto desde el que se lanza el raycast
         Vector3 origin = transform.position;
         Vector3 forward = transform.forward;
-
         // Raycast para detectar objetos en la dirección forward
         RaycastHit hit;
-        if (Physics.Raycast(origin, forward, out hit, raycastDistance))
+        if (Physics.Raycast(transform.position, forward, out hit, raycastDistance))
         {
             // Verificar si el objeto tiene el tag "Movable"
             if (hit.collider.CompareTag("Movable"))
@@ -30,14 +31,18 @@ public class PlayerRotate : MonoBehaviour
                 Debug.DrawRay(origin, forward * raycastDistance, Color.green);
 
                 playerController.animator.SetBool("Arrastrando", true);
+
                 playerController.speed = speedPush;
-                playerController.canJump = false;
+                playerController.animator.ResetTrigger("Saltar");
+
+                playerController.jumpForce = 0f;
             }
             else
             {
                 playerController.animator.SetBool("Arrastrando", false);
+
                 playerController.speed = initialSpeed;
-                playerController.canJump = true;
+                playerController.jumpForce = initialJumpForce;
 
                 Debug.DrawRay(origin, forward * raycastDistance, Color.red);
             }
@@ -45,8 +50,9 @@ public class PlayerRotate : MonoBehaviour
         else
         {
             playerController.animator.SetBool("Arrastrando", false);
+
             playerController.speed = initialSpeed;
-            playerController.canJump = true;
+            playerController.jumpForce = initialJumpForce;
 
             Debug.DrawRay(origin, forward * raycastDistance, Color.gray);
         }

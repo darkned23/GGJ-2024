@@ -1,7 +1,7 @@
 using UnityEngine;
 using System.Collections;
 
-public class PlayerController : MonoBehaviour
+public class VersionAnterior : MonoBehaviour
 {
     private CharacterController characterController;
     private PlayerRespawn playerRespawn;
@@ -24,17 +24,18 @@ public class PlayerController : MonoBehaviour
     public bool allowAttack;
 
     [Header("Health")]
+
+    public float moveCooldown = 5.0f;
     public int maxHealth = 100;
     public float invulnerabilityTime = 1.5f;
     public float knockbackForce = 5f;
+
     private int currentHealth;
     private bool isInvulnerable = false;
     //----------------------------------------------------------------------------------//
-
-    [HideInInspector] public float canMove = 1f;
-    private bool canAttack = true;
+    private bool isGrounded;
+    public bool canAttack = true;
     [HideInInspector] public bool canJump = true;
-    [HideInInspector] public bool isGrounded;
     [HideInInspector] public float horizontalMovement;
 
     void Start()
@@ -55,29 +56,8 @@ public class PlayerController : MonoBehaviour
         // Mover horizontalmente
         horizontalMovement = Input.GetAxis("Horizontal");
         Vector3 movement = new Vector3(horizontalMovement, 0f, 0f);
-        characterController.Move(movement * (speed * canMove) * Time.deltaTime);
+        characterController.Move(movement * speed * Time.deltaTime);
         animator.SetFloat("Velocidad", Mathf.Abs(horizontalMovement));
-
-        // Raycast para la detección de suelo
-        RaycastHit hit;
-        if (Physics.Raycast(transform.position, Vector3.down, out hit, distanceRayCastGround))
-        {
-            isGrounded = true;
-            // Visualizar el raycast en el Inspector
-            Debug.DrawRay(transform.position, Vector3.down * distanceRayCastGround, Color.green);
-        }
-        else
-        {
-            isGrounded = false;
-            // Visualizar el raycast en el Inspector
-            Debug.DrawRay(transform.position, Vector3.down * distanceRayCastGround, Color.red);
-        }
-
-        // Aplicar gravedad
-        if (!isGrounded)
-        {
-            verticalVelocity -= gravity * Time.deltaTime;
-        }
 
         // Saltar
         if (isGrounded && Input.GetButtonDown("Jump") && canJump)
@@ -86,11 +66,32 @@ public class PlayerController : MonoBehaviour
             Jump(jumpForce);
         }
 
-        // Ataca
         if (Input.GetMouseButtonDown(0) && canAttack && allowAttack)
         {
             canAttack = false;
             Attack();
+        }
+        // Raycast para la detección de suelo
+        RaycastHit hit;
+        if (Physics.Raycast(transform.position, Vector3.down, out hit, distanceRayCastGround))
+        {
+            isGrounded = true;
+
+            // Visualizar el raycast en el Inspector
+            Debug.DrawRay(transform.position, Vector3.down * distanceRayCastGround, Color.green);
+        }
+        else
+        {
+            isGrounded = false;
+
+            // Visualizar el raycast en el Inspector
+            Debug.DrawRay(transform.position, Vector3.down * distanceRayCastGround, Color.red);
+        }
+
+        // Aplicar gravedad
+        if (!isGrounded)
+        {
+            verticalVelocity -= gravity * Time.deltaTime;
         }
 
         // Aplicar movimiento vertical
@@ -102,11 +103,12 @@ public class PlayerController : MonoBehaviour
         // Verificar si la colisión es con un enemigo
         if (hit.gameObject.CompareTag("Enemy"))
         {
-            StartCoroutine(Dizzy());
+            StartCoroutine(Knockback());
         }
         else if (hit.gameObject.CompareTag("Danger"))
         {
-            StartCoroutine(Dizzy());
+            StartCoroutine(Knockback());
+
             StartCoroutine(playerRespawn.Respawn());
         }
     }
@@ -147,15 +149,14 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    IEnumerator CooldownJump()
+    public IEnumerator CooldownJump()
     {
         // Espera el tiempo de cooldown
         yield return new WaitForSeconds(jumpCooldown);
 
         canJump = true;
     }
-
-    IEnumerator CooldownAttack()
+    public IEnumerator CooldownAttack()
     {
         // Espera el tiempo de cooldown
         yield return new WaitForSeconds(attackCooldown);
@@ -163,24 +164,25 @@ public class PlayerController : MonoBehaviour
         canAttack = true;
     }
 
-    IEnumerator Dizzy()
+    IEnumerator Knockback()
     {
-        canMove = 0;
+        float currentSpeed = speed;
+        speed = 0;
         TakeDamage(10);
 
         yield return new WaitForSeconds(playerRespawn.waitRespawn);
 
-        canMove = 1;
+        speed = currentSpeed;
         animator.ResetTrigger("Saltar");
     }
 
     public void TakeDamage(int damage)
     {
         if (!isInvulnerable)
+        // Aplicar daño al jugador
         {
-            // Aplicar daño al jugador
             currentHealth -= damage;
-            animator.SetTrigger("RecibirGolpe");
+            // animator.SetTrigger("RecibirGolpe");
 
             // Activar la invulnerabilidad y el retroceso
             StartCoroutine(InvulnerabilityTime());
@@ -192,7 +194,6 @@ public class PlayerController : MonoBehaviour
             }
         }
     }
-
     IEnumerator InvulnerabilityTime()
     {
         // Activar la invulnerabilidad
@@ -204,10 +205,9 @@ public class PlayerController : MonoBehaviour
         // Desactivar la invulnerabilidad después del tiempo especificado
         isInvulnerable = false;
     }
-
     void Die()
     {
         // Puedes agregar aquí lógica de muerte, como reiniciar el nivel o mostrar una pantalla de Game Over
-        Debug.Log("¡El jugador ha muerto!");
+        Debug.Log("Player has died.");
     }
 }
