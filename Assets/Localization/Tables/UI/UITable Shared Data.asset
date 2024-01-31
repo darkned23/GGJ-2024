@@ -27,6 +27,10 @@ MonoBehaviour:
     m_Key: Button Credits
     m_Metadata:
       m_Items: []
+  - m_Id: 169665551204352
+    m_Key: Button Languages
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:
