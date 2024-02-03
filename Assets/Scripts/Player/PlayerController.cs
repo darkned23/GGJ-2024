@@ -6,6 +6,8 @@ public class PlayerController : MonoBehaviour
     private CharacterController characterController;
     private PlayerRespawn playerRespawn;
 
+    private PlayerUI playerUI;
+
     [Header("Movement")]
     public float speed = 5.0f;
     public float jumpForce = 10f;
@@ -41,6 +43,7 @@ public class PlayerController : MonoBehaviour
     {
         characterController = GetComponent<CharacterController>();
         playerRespawn = GetComponent<PlayerRespawn>();
+        playerUI = GetComponent<PlayerUI>();
 
         currentHealth = maxHealth;
 
@@ -166,7 +169,7 @@ public class PlayerController : MonoBehaviour
     IEnumerator Dizzy()
     {
         canMove = 0;
-        TakeDamage(10);
+        TakeDamage(1);
 
         yield return new WaitForSeconds(playerRespawn.waitRespawn);
 
