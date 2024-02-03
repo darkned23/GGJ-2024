@@ -9,10 +9,11 @@ public class ChangePlayer : MonoBehaviour
     public GameObject player2;
     public GameObject camera2;
     public float cooldownTime = 2f; // Tiempo de cooldown en segundos
-    public PlayerController playerControllerCurrent; // agregar forma de saber cual es el player activo
 
     private bool canSwitch = true;
     private float lastSwitchTime;
+    private GameObject currentPlayer;
+    private PlayerUI playerUI;
 
     void Start()
     {
@@ -27,6 +28,10 @@ public class ChangePlayer : MonoBehaviour
         camera1.SetActive(true);
         player2.SetActive(false);
         camera2.SetActive(false);
+
+        currentPlayer = player1;
+        playerUI = currentPlayer.GetComponent<PlayerUI>();
+        playerUI.playerController = currentPlayer.GetComponent<PlayerController>();
 
         // Initialize the last switch time
         lastSwitchTime = -cooldownTime;
@@ -63,5 +68,16 @@ public class ChangePlayer : MonoBehaviour
 
         player1.SetActive(!player1.activeSelf);
         player2.SetActive(!player2.activeSelf);
+        if (currentPlayer == player1)
+        {
+            currentPlayer = player2;
+        }
+        else
+        {
+            currentPlayer = player1;
+        }
+        playerUI = currentPlayer.GetComponent<PlayerUI>();
+        playerUI.playerController = currentPlayer.GetComponent<PlayerController>();
+        playerUI.UpdateHeartSprites();
     }
 }

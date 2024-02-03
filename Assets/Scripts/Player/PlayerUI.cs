@@ -28,7 +28,7 @@ public class PlayerUI : MonoBehaviour
         }
     }
 
-    void UpdateHeartSprites()
+    public void UpdateHeartSprites()
     {
         int activeHearts = GetActiveHearts();
 
