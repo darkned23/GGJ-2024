@@ -24,10 +24,10 @@ public class PlayerController : MonoBehaviour
     public bool allowAttack;
 
     [Header("Health")]
-    public int maxHealth = 100;
+    public int maxHealth = 3;
     public float invulnerabilityTime = 1.5f;
-    public float knockbackForce = 5f;
-    private int currentHealth;
+    // public float knockbackForce = 5f;
+    [HideInInspector] public int currentHealth;
     private bool isInvulnerable = false;
     //----------------------------------------------------------------------------------//
 

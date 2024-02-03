@@ -9,6 +9,7 @@ public class ChangePlayer : MonoBehaviour
     public GameObject player2;
     public GameObject camera2;
     public float cooldownTime = 2f; // Tiempo de cooldown en segundos
+    public PlayerController playerControllerCurrent; // agregar forma de saber cual es el player activo
 
     private bool canSwitch = true;
     private float lastSwitchTime;
